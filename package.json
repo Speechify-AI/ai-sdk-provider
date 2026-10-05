@@ -1,0 +1,80 @@
+{
+  "name": "@speechify/ai-sdk-provider",
+  "version": "0.1.0",
+  "description": "SpeechifyAI text to speech for the Vercel AI SDK: generateSpeech() with Simba 3 models, speech marks included.",
+  "license": "MIT",
+  "author": "Speechify <developers@speechify.ai> (https://speechify.ai)",
+  "homepage": "https://docs.speechify.ai/build/guides/integrations/vercel-ai-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Speechify-AI/ai-sdk-provider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Speechify-AI/ai-sdk-provider/issues"
+  },
+  "keywords": [
+    "ai",
+    "ai-sdk",
+    "vercel",
+    "speechify",
+    "text-to-speech",
+    "tts",
+    "speech",
+    "generateSpeech"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --maxWorkers=2 --dir src",
+    "test:live": "vitest run --maxWorkers=2 --dir test",
+    "check:dist": "node scripts/check-dist.mjs",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:dist"
+  },
+  "peerDependencies": {
+    "@ai-sdk/provider": "^4.0.0",
+    "ai": "^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "ai": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@ai-sdk/provider": "4.0.21",
+    "@arethetypeswrong/core": "0.18.5",
+    "@types/node": "22.20.4",
+    "ai": "7.0.126",
+    "publint": "0.3.24",
+    "tsdown": "0.23.0",
+    "typescript": "5.9.3",
+    "vitest": "5.0.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

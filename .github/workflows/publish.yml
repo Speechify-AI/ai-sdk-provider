@@ -1,0 +1,31 @@
+name: publish
+
+# Publishes to npm with a provenance attestation when a GitHub release is published.
+# Provenance can only be generated from CI, never from a laptop.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - name: Tag matches package version
+        run: test "v$(node -p "require('./package.json').version")" = "${{ github.event.release.tag_name }}"
+      - run: npm ci
+      # prepublishOnly runs typecheck, unit tests, build and the dist check.
+      - run: npm publish --provenance --access public
+        env:
+          # Empty once npm trusted publishing is configured for the package; npm then authenticates over OIDC.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
