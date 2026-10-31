@@ -1,6 +1,6 @@
 {
   "name": "@speechify/ai-sdk-provider",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "SpeechifyAI text to speech for the Vercel AI SDK: generateSpeech() with Simba 3 models, speech marks included.",
   "license": "MIT",
   "author": "Speechify <developers@speechify.ai> (https://speechify.ai)",

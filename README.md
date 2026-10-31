@@ -1,7 +1,7 @@
 # SpeechifyAI provider for the Vercel AI SDK
 
 `@speechify/ai-sdk-provider` adds [SpeechifyAI](https://speechify.ai) text to speech to the [Vercel AI SDK](https://ai-sdk.dev).
-It implements the AI SDK's speech model specification (`SpeechModelV4`), so `generateSpeech()` works with Speechify's Simba 3 models and returns word-level speech marks with every clip.
+It implements the AI SDK's speech model specification (`SpeechModelV4`), so `generateSpeech()` works with Speechify's Simba 3 models, including Simba 3.5 and returns word-level speech marks with every clip.
 It is maintained by Speechify and calls [`POST /v1/audio/speech`](https://docs.speechify.ai/build/api-reference/v1/audio/speech) with `fetch`, with no other runtime dependency.
 
 ## Install
@@ -26,7 +26,7 @@ import { generateSpeech } from 'ai';
 import { speechify } from '@speechify/ai-sdk-provider';
 
 const { audio, providerMetadata } = await generateSpeech({
-  model: speechify.speech('simba-3.2'),
+  model: speechify.speech('simba-3.5'),
   text: 'Hello from Speechify and the AI SDK.',
   voice: 'harper_32',
 });
@@ -59,11 +59,12 @@ const speechify = createSpeechify({
 
 | Model | Languages |
 | --- | --- |
+| `simba-3.5` | Newest model, and the one to start with. 48 languages and 1,107 voices, and it works with every voice. |
 | `simba-3.2` | English. Lowest latency and richest expressivity. Every English voice, cloned voices included. |
 | `simba-3.0` | English, German, Spanish (Spain and Mexico), French, Italian and Brazilian Portuguese. |
 
 A voice works with a model when the model is in that voice's `models` list in [`GET /v1/voices`](https://docs.speechify.ai/build/api-reference/v1/voices/get).
-`harper_32` is the default and works with both models.
+`harper_32` is the default voice and works with every model.
 A voice the model cannot serve fails with a `400`, and an unknown voice with a `404`.
 
 ## Options
@@ -83,7 +84,7 @@ A voice the model cannot serve fails with a `400`, and an unknown voice with a `
 
 ```ts
 const { audio } = await generateSpeech({
-  model: speechify.speech('simba-3.0'),
+  model: speechify.speech('simba-3.5'),
   text: 'Guten Tag, das ist ein kurzer Test.',
   voice: 'anton',
   language: 'de',
