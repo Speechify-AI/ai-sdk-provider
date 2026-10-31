@@ -112,6 +112,12 @@ describe('request', () => {
     });
   });
 
+  it('accepts simba-3.5 and sends it as the model', async () => {
+    const { call, result } = await generate({ voice: 'harper_32' }, 'simba-3.5');
+    expect(call.body.model).toBe('simba-3.5');
+    expect(result.response.modelId).toBe('simba-3.5');
+  });
+
   it('sends the model id and voice as given', async () => {
     const { call } = await generate({ voice: 'geffen_32' }, 'simba-3.0');
     expect(call.body.model).toBe('simba-3.0');
