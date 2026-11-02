@@ -1,8 +1,8 @@
 /**
  * Speech models served by `POST /v1/audio/speech`.
  *
- * - `simba-3.5`: newest model. 48 languages, 1,107 voices, and it works with every voice.
- * - `simba-3.2`: lowest latency and richest expressivity, English only.
+ * - `simba-3.5`: newest model. 48 languages, works with every voice.
+ * - `simba-3.2`: English. Every English voice, cloned voices included.
  * - `simba-3.0`: English plus de-DE, es-ES, es-MX, fr-FR, it-IT and pt-BR.
  */
 export type SpeechifySpeechModelId = 'simba-3.5' | 'simba-3.2' | 'simba-3.0' | (string & {});
