@@ -10,7 +10,7 @@ import {
 
 export async function example() {
   const { audio, providerMetadata } = await generateSpeech({
-    model: speechify.speech('simba-3.2'),
+    model: speechify.speech('simba-3.5'),
     text: 'Hello from Speechify and the AI SDK.',
     voice: 'harper_32',
   });
@@ -27,7 +27,7 @@ export function providerInstance() {
 
 export async function options() {
   const { audio } = await generateSpeech({
-    model: speechify.speech('simba-3.0'),
+    model: speechify.speech('simba-3.5'),
     text: 'Guten Tag, das ist ein kurzer Test.',
     voice: 'anton',
     language: 'de',
